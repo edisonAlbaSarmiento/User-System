@@ -1,0 +1,18 @@
+<div>
+  <h1>Create Product</h1>
+  <form [formGroup]="productForm" (ngSubmit)="submitForm()" novalidate>
+      <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" formControlName="fullName" class="form-control" maxlength="20">
+      </div>
+      <div class="form-group">
+          <label>Email</label>
+          <textarea class="form-control" formControlName="email" rows="3" maxlength="150"></textarea>
+      </div>
+      <div class="form-group">
+          <label>CellPhone</label>
+          <input type="number" formControlName="cellPhone" class="form-control">
+      </div>
+      <button type="submit">Submit</button>
+  </form>
+</div>
