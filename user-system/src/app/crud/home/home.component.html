@@ -1,6 +1,69 @@
-<div>
-  <h1>My Products</h1>
-  <button type="button" [routerLink]="/crud/create/">Create new employee</button>
+
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by fullName"
+        [(ngModel)]="fullName"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="searchEmployee()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>Employee List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let employee of employees; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setEmployee(employees, i)"
+      >
+        {{ employees.fullName }}
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    {{ currentEmployee.fullName }}
+    <div *ngIf="currentEmployee">
+      <h4>Employee</h4>
+      <div>
+        <label><strong>FullName:</strong></label> {{ currentEmployee.fullName }}
+      </div>
+      <div>
+        <label><strong>Email:</strong></label>
+        {{ currentEmployee.email }}
+      </div>
+      <div>
+        <label><strong>CellPhone:</strong></label>
+        {{ currentEmployee.cellPhone }}
+      </div>
+
+      <a class="badge badge-warning" href="/crud/show/{{ currentEmployee.id }}">
+        Edit
+      </a>
+    </div>
+
+    <div *ngIf="!currentEmployee">
+      <br />
+      <p>Please click on a Employee...</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div>
+  <h1>Employee</h1>
+  <a type="button" routerLink="/crud/create/">Create new employee</a>
   <table>
       <thead>
           <tr>
@@ -12,7 +75,7 @@
           </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let product of products">
+          <tr *ngFor="let employee of employees">
               <td>{{employee.id}}</td>
               <td>{{employee.fullName}}</td>
               <td>{{employee.email}}</td>
@@ -24,4 +87,4 @@
           </tr>
       </tbody>
   </table>
-</div>
+</div> -->

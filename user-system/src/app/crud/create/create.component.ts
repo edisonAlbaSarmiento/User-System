@@ -1,34 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import { CrudService } from '../crud.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { EmployeeService } from 'src/app/services/service';
 
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css']
 })
-
-export class CreateComponent implements OnInit {
-  employeeForm: FormGroup;
+export class AddEmployeeComponent{
+  employeeData = {
+    fullName: '',
+    email: '',
+    cellPhone: ''
+  };
+  submitted = false;
+  errorMessage = false;
+  constructor(private employeeService: EmployeeService) { }
 
   ngOnInit() {
-      this.employeeForm = this.fb.group({
-      fullName: [''],
-      email: [''],
-      cellPhone: [''],
-    })
   }
 
-  constructor(
-    public fb: FormBuilder,
-    private router: Router,
-    public crudService: CrudService
-  ){ }
-  submitForm() {
-    this.crudService.create(this.employeeForm.value).subscribe(res => {
-      console.log('Employee created!', res)
-      this.router.navigateByUrl('/crud/home/')
-    )}
+  saveEmployee() {
+    const data = {
+      fullName: this.employeeData.fullName,
+      email: this.employeeData.email,
+      cellPhone: this.employeeData.cellPhone
+    };
 
+    this.employeeService.create(data)
+      .subscribe(
+        response => {
+          console.log(response);
+          this.submitted = true;
+        },
+        error => {
+          this.errorMessage = true;
+          console.log('ERROR this.errorMessage',this.errorMessage);
+
+          console.log('ERROR',error);
+        });
+  }
+
+  newEmployee() {
+    this.submitted = false;
+    this.employeeData = {
+      fullName: '',
+      email: '',
+      cellPhone: '',
+    };
+  }
 }

@@ -1,24 +1,59 @@
 import { Component, OnInit } from '@angular/core';
-import { CrudService } from '../data.service';
-import { Employee } from '../employee';
+import { EmployeeService } from 'src/app/services/service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class EmployeeeListComponent implements OnInit {
 
-  employees: Employee[] = [];
+  employees: any;
+  currentEmployee = null;
+  currentIndex = -1;
+  fullName = '';
+  cellPhone = '';
+  email = '';
 
-  constructor(public crudService: CrudService) { }
+
+  constructor(private employeeService: EmployeeService) { }
 
   ngOnInit() {
-
-    this.crudService.getAll().subscribe((data: Employee[])=>{
-      console.log(data);
-      this.employees = data;
-    })
+    this.retrieveTutorials();
   }
 
+  retrieveTutorials() {
+    this.employeeService.getAll()
+      .subscribe(
+        data => {
+          this.employees = data;
+          console.log('HOLA', data);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  refreshList() {
+    this.retrieveTutorials();
+    this.currentEmployee = null;
+    this.currentIndex = -1;
+  }
+
+  setEmployee(employee, index) {
+    this.currentEmployee = employee;
+    this.currentIndex = index;
+  }
+
+  searchEmployee() {
+    this.employeeService.findByTitle(this.fullName)
+      .subscribe(
+        data => {
+          this.employees = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
+  }
 }
