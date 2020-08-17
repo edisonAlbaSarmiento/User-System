@@ -1,0 +1,50 @@
+<div *ngIf="currentEmployee" class="edit-form">
+  <h4>Tutorial</h4>
+  <form>
+    <div class="form-group">
+      <label for="fullName">FullName</label>
+      <input
+        type="text"
+        class="form-control"
+        id="fullName"
+        [(ngModel)]="currentEmployee.fullName"
+        name="fullName"
+      />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="text"
+        class="form-control"
+        id="email"
+        [(ngModel)]="currentEmployee.email"
+        name="email"
+      />
+    </div>
+    <div class="form-group">
+      <label for="cellPhone">CellPhone</label>
+      <input
+        class="form-control"
+        id="cellPhone"
+        required
+        [(ngModel)]="employeeData.cellPhone"
+        name="cellPhone"
+      />
+    </div>
+  </form>
+
+
+  <button class="badge badge-danger mr-2" (click)="deleteEmployee()">
+    Delete
+  </button>
+
+  <button type="submit" class="badge badge-success" (click)="updatedEmployee()">
+    Update
+  </button>
+  <p>{{ message }}</p>
+</div>
+
+<div *ngIf="!currentTutorial">
+  <br />
+  <p>Cannot access this Tutorial...</p>
+</div>

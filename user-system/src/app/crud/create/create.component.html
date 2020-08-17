@@ -1,0 +1,47 @@
+
+<div>
+  <div>
+    <div class="form-group">
+      <label for="fullName">Create employee</label>
+      <input
+        type="text"
+        class="form-control"
+        id="fullName"
+        required
+        [(ngModel)]="employeeData.fullName"
+        name="fullName"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        class="form-control"
+        id="email"
+        required
+        [(ngModel)]="employeeData.email"
+        name="email"
+      />
+    </div>
+    <div class="form-group">
+      <label for="cellPhone">CellPhone</label>
+      <input
+        class="form-control"
+        id="cellPhone"
+        required
+        [(ngModel)]="employeeData.cellPhone"
+        name="cellPhone"
+      />
+    </div>
+
+    <button (click)="saveEmployee()" class="btn btn-success">Submit</button>
+  </div>
+
+  <div *ngIf="errorMessage">
+    <h4>Error in register!</h4>
+  </div>
+  <div *ngIf="submitted">
+    <h4>You submitted successfully!</h4>
+    <button class="btn btn-success" (click)="newEmployee()">Add</button>
+  </div>
+</div>

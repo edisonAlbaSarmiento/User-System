@@ -1,0 +1,12 @@
+{
+  "userSystem": {
+    "host": "localhost",
+    "port": 3306,
+    "url": "",
+    "database": "userSystem",
+    "password": "Edison01",
+    "name": "userSystem",
+    "user": "root",
+    "connector": "mysql"
+  }
+}
